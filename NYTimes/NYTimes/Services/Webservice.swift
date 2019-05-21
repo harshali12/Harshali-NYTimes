@@ -11,7 +11,7 @@ import UIKit
 
 //topstories/v2/science.json?api-key=0dtvmf1sj0nJHFh2ijAmwnkEDkUbKzaa
 let kBaseURL = "https://api.nytimes.com/svc/"
-let kTopStoryUrl = "topstories/v2/science.json?"
+let kTopStoryUrl = "topstories/v2/science.json?api-key=0dtvmf1sj0nJHFh2ijAmwnkEDkUbKzaa"
 let api_key = "0dtvmf1sj0nJHFh2ijAmwnkEDkUbKzaa"
 let kUrlEncoded = "application/x-www-form-urlencoded"
 let kContentType = "Content-Type"
@@ -121,7 +121,6 @@ class STWebService: NSObject {
         return requestData!
     }
     
-    typealias CompletionHandler = (_ statusCode:Int, _ data:[String:Any]?, _ error:Error? ) -> Void
     
     /**
      * This method serialize responsed data for login service
@@ -129,69 +128,27 @@ class STWebService: NSObject {
      * - Parameter token: String value
      */
     
-    func fetchNYTimesItems(completionHandler:@escaping CompletionHandler) {
+    func fetchNYTimesItems(completionHandler:@escaping(NYTimesResponse) -> Void) {
         
         let getDomainURL = getURL(kTopStoryUrl)
         let url = URL(string: getDomainURL)
-        var urlReqeust = postRequest(url: url!)
-        urlReqeust.setValue(kUrlEncoded, forHTTPHeaderField: kContentType)
+        let urlReqeust = getRequest(url: url!)
+        var nyTimesResponse = NYTimesResponse()
+        //urlReqeust.setValue(kUrlEncoded, forHTTPHeaderField: kContentType)
         
         let task = URLSession.shared.dataTask(with: urlReqeust as URLRequest, completionHandler: { responseData , response , error in
-            var statusCode = 0
-            if response != nil {
-                let httpResponse = response as! HTTPURLResponse
-                statusCode = httpResponse.statusCode
-            }
-            else {
-                statusCode = 0
-            }
             guard let data = responseData , let jsonData = try? JSONSerialization.jsonObject(with: data, options: [])
                 else {
-                    DispatchQueue.main.async {
-                        completionHandler(statusCode,nil,error)
-                    }
                     return
             }
-            DispatchQueue.main.async {
-                completionHandler(statusCode,jsonData as? [String:Any],error)
-            }
+            do {
+                if let data = responseData {
+                let nResponse = try NYTimesResponse.decode(data: data)
+                nyTimesResponse = nResponse
+                }
+            }catch{}
+            completionHandler(nyTimesResponse)
         })
         task.resume()
     }
-    
-//    func login(email:String, password:String,completionHandler:@escaping CompletionHandler) {
-//
-//        let parameters = [kEmail:email,kPassword:password]
-//        let loginURL = getTestURL(kLoginPath)
-//        let url = URL(string: loginURL)
-//        var urlReqeust = postRequest(url: url!)
-//        urlReqeust.httpBody = requestBodyFrom(details: parameters)
-//
-//
-//        let task = URLSession.shared.dataTask(with: urlReqeust as URLRequest, completionHandler: { responseData , response , error in
-//            var statusCode = 0
-//
-//            if response != nil {
-//                let httpResponse = response as! HTTPURLResponse
-//                statusCode = httpResponse.statusCode
-//            }
-//            else {
-//                statusCode = 0
-//            }
-//
-//            guard let data = responseData , let jsonData = try? JSONSerialization.jsonObject(with: data, options: [])
-//                else {
-//                    DispatchQueue.main.async {
-//                        completionHandler(statusCode,nil,error)
-//                    }
-//                    return
-//            }
-//            DispatchQueue.main.async {
-//                completionHandler(statusCode,jsonData as? [String:Any],error)
-//            }
-//        })
-//        task.resume()
-//    }
-    
-
 }
