@@ -28,12 +28,7 @@ class NYTimesProductTableViewCell: UITableViewCell {
     func configureNewsCell(viewModel:NYTimesViewModel, indexPath:IndexPath) {
         titleLabel.text = viewModel.getTitle(indexPath: indexPath)
         abstractDateLabel.text = viewModel.getAbstract(indexPath: indexPath)
-        
-//        newsImage.sd_setImage(with: URL(string:imageURL), placeholderImage: #imageLiteral(resourceName: "preview"), options: .refreshCached, completed: { (image, error, type, url) in
-//            if image != nil {
-//                self.newsImage.image = image
-//            }
-//        })
+ 
     }
     
 }

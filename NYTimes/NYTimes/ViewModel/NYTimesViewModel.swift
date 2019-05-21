@@ -17,7 +17,6 @@ class NYTimesViewModel {
     private var isPaging = false
     init() {}
 }
-//MARK: GetNews : Web Service & Pagination Calls
 extension NYTimesViewModel {
     
     func getNYTimesProduct(completion: @escaping () -> Void) {
