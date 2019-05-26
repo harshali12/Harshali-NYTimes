@@ -20,7 +20,6 @@ class NYTimesViewModel {
 extension NYTimesViewModel {
 
     func getNYTimesProduct(completion: @escaping () -> Void) {
-       // CustomLoader.showActivityView(view: NYTimesListingViewController().view)
         STWebService.shared.fetchNYTimesItems(completionHandler: {
             (statusCode, response , error) in
             if statusCode == 200 {
@@ -30,12 +29,11 @@ extension NYTimesViewModel {
                     completion()
                 }
                 else {
-                    CustomLoader.removeActivityIndicator(NYTimesListingViewController().view)
+                    return
                 }
             } else {
-                CustomLoader.showActivityView(view: NYTimesListingViewController().view)
+                return
             }
-            CustomLoader.showActivityView(view: NYTimesListingViewController().view)
         })
     }
   

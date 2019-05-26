@@ -18,12 +18,14 @@ class NYTimesListingViewController: UIViewController {
         super.viewDidLoad()
         title = "NYTimes Top Items"
         setupTableView()
+        CustomLoader.showActivityView(view: self.view)
         nyTimesViewModel.getNYTimesProduct(completion: {
             DispatchQueue.main.async {
+                CustomLoader.removeActivityIndicator(self.view)
                 self.tblView.reloadData()
             }
         })
-
+       CustomLoader.removeActivityIndicator(self.view)
     }
     
     static func loadFromNib() -> NYTimesListingViewController {
