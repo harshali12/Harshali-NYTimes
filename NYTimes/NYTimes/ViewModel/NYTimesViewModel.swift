@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-
+import SDWebImage
 class NYTimesViewModel {
     
     private var product = [NYTimes]()
@@ -18,15 +18,25 @@ class NYTimesViewModel {
     init() {}
 }
 extension NYTimesViewModel {
-    
+
     func getNYTimesProduct(completion: @escaping () -> Void) {
-        
-        STWebService.shared.fetchNYTimesItems() { (response) in
-            if let data = response.results , data.count > 0 {
-                self.product += data
+       // CustomLoader.showActivityView(view: NYTimesListingViewController().view)
+        STWebService.shared.fetchNYTimesItems(completionHandler: {
+            (statusCode, response , error) in
+            if statusCode == 200 {
+                if let data = response?[kResult] as? [[String:AnyObject]] {
+                    let productData = data.map({NYTimes(jsonObject :$0 as [String : AnyObject])})
+                    self.product = productData
+                    completion()
+                }
+                else {
+                    CustomLoader.removeActivityIndicator(NYTimesListingViewController().view)
+                }
+            } else {
+                CustomLoader.showActivityView(view: NYTimesListingViewController().view)
             }
-            completion()
-        }
+            CustomLoader.showActivityView(view: NYTimesListingViewController().view)
+        })
     }
   
 }
@@ -44,13 +54,16 @@ extension NYTimesViewModel {
 }
 //MARK: News data getter methods
 extension NYTimesViewModel {
-    
     func getTitle(indexPath:IndexPath) -> String {
-        return product[indexPath.row].title ?? ""
+        return product[indexPath.row].title 
     }
     
     func getAbstract(indexPath:IndexPath) -> String {
-        return product[indexPath.row].abstract ?? ""
+        return product[indexPath.row].abstract 
     }
-
+    
+    func getProductImageURL(indexPath:IndexPath) -> String {
+        var multimedia = product[indexPath.row].multimedia
+        return multimedia?[0].url ?? ""
+    }
 }

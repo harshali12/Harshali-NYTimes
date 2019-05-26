@@ -18,6 +18,8 @@ let kContentType = "Content-Type"
 
 var count : Int?
 
+typealias CompletionHandler = (_ statusCode:Int, _ data:[String:Any]?, _ error:Error? ) -> Void
+
 class STWebService: NSObject {
     
     static let shared = STWebService()
@@ -128,27 +130,42 @@ class STWebService: NSObject {
      * - Parameter token: String value
      */
     
-    func fetchNYTimesItems(completionHandler:@escaping(NYTimesResponse) -> Void) {
-        
+    
+    func fetchNYTimesItems(completionHandler:@escaping CompletionHandler) {
         let getDomainURL = getURL(kTopStoryUrl)
         let url = URL(string: getDomainURL)
         let urlReqeust = getRequest(url: url!)
-        var nyTimesResponse = NYTimesResponse()
-        //urlReqeust.setValue(kUrlEncoded, forHTTPHeaderField: kContentType)
-        
         let task = URLSession.shared.dataTask(with: urlReqeust as URLRequest, completionHandler: { responseData , response , error in
+            var statusCode = 0
+            if response != nil {
+                let httpResponse = response as! HTTPURLResponse
+                statusCode = httpResponse.statusCode
+            }
+            else {
+                statusCode = 0
+            }
             guard let data = responseData , let jsonData = try? JSONSerialization.jsonObject(with: data, options: [])
                 else {
+                    DispatchQueue.main.async {
+                        completionHandler(statusCode,nil,error)
+                    }
                     return
             }
-            do {
-                if let data = responseData {
-                let nResponse = try NYTimesResponse.decode(data: data)
-                nyTimesResponse = nResponse
-                }
-            }catch{}
-            completionHandler(nyTimesResponse)
+            DispatchQueue.main.async {
+                completionHandler(statusCode,jsonData as? [String:Any],error)
+            }
         })
         task.resume()
+    }
+}
+
+extension STWebService {
+    func jsonToNSData(json: AnyObject) -> NSData?{
+        do {
+            return try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted) as NSData
+        } catch let myJSONError {
+            print(myJSONError)
+        }
+        return nil;
     }
 }

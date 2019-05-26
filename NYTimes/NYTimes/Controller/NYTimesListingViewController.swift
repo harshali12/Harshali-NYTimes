@@ -18,9 +18,12 @@ class NYTimesListingViewController: UIViewController {
         super.viewDidLoad()
         title = "NYTimes Top Items"
         setupTableView()
-        nyTimesViewModel.getNYTimesProduct {
-            self.tblView.reloadData()
-        }
+        nyTimesViewModel.getNYTimesProduct(completion: {
+            DispatchQueue.main.async {
+                self.tblView.reloadData()
+            }
+        })
+
     }
     
     static func loadFromNib() -> NYTimesListingViewController {
@@ -34,7 +37,7 @@ class NYTimesListingViewController: UIViewController {
         tblView.separatorStyle = .none
         //register views to table view
         tblView.register(UINib(nibName: kNYTimesTableViewCell, bundle: nil),
-                           forCellReuseIdentifier: kNYTimesTableViewCell)
+                         forCellReuseIdentifier: kNYTimesTableViewCell)
         self.edgesForExtendedLayout = []
         
     }
@@ -57,7 +60,7 @@ extension NYTimesListingViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: kNYTimesTableViewCell,
                                                  for: indexPath) as! NYTimesProductTableViewCell
-        cell.configureNewsCell(viewModel: nyTimesViewModel, indexPath: indexPath)
+        cell.configureItemsCell(viewModel: nyTimesViewModel, indexPath: indexPath)
         return cell
     }
     

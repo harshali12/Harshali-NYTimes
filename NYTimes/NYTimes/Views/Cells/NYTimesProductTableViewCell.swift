@@ -25,9 +25,15 @@ class NYTimesProductTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configureNewsCell(viewModel:NYTimesViewModel, indexPath:IndexPath) {
+    func configureItemsCell(viewModel:NYTimesViewModel, indexPath:IndexPath) {
         titleLabel.text = viewModel.getTitle(indexPath: indexPath)
         abstractDateLabel.text = viewModel.getAbstract(indexPath: indexPath)
+        let imageURL = viewModel.getProductImageURL(indexPath: indexPath)
+        productImage.sd_setImage(with: URL(string:imageURL), placeholderImage: nil, options: .refreshCached, completed: { (image, error, type, url) in
+            if image != nil {
+                self.productImage.image = image
+            }
+        })
  
     }
     
