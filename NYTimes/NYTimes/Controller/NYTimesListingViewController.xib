@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NYTimesListingViewController" customModule="NYTimes" customModuleProvider="target">
             <connections>
+                <outlet property="noInternetLbl" destination="3Zj-lh-jXi" id="wAb-2l-gWZ"/>
                 <outlet property="tblView" destination="gyh-ds-TGF" id="xuA-4N-3fB"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -24,16 +25,27 @@
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gyh-ds-TGF">
                     <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="2w4-cg-EHt"/>
                         <outlet property="delegate" destination="-1" id="C9N-5V-Z6d"/>
                     </connections>
                 </tableView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Internet Connection" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Zj-lh-jXi">
+                    <rect key="frame" x="59" y="269" width="202" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="1Ry-XJ-xO0"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="3Zj-lh-jXi" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="1hv-n4-Aty"/>
                 <constraint firstItem="gyh-ds-TGF" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ArE-ew-EvO"/>
+                <constraint firstItem="3Zj-lh-jXi" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="FJK-Uy-57D"/>
                 <constraint firstItem="gyh-ds-TGF" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Jbq-Ws-PeN"/>
                 <constraint firstItem="gyh-ds-TGF" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="Uay-ha-FbS"/>
                 <constraint firstItem="gyh-ds-TGF" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="Woj-AW-QUc"/>

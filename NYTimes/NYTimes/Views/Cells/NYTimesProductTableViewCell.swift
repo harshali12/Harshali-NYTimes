@@ -11,7 +11,7 @@ import UIKit
 class NYTimesProductTableViewCell: UITableViewCell {
 
     @IBOutlet var titleLabel: UILabel!
-    @IBOutlet var abstractDateLabel: UILabel!
+    @IBOutlet var abstractLabel: UILabel!
     @IBOutlet var productImage: UIImageView!
     
     override func awakeFromNib() {
@@ -27,9 +27,9 @@ class NYTimesProductTableViewCell: UITableViewCell {
     
     func configureItemsCell(viewModel:NYTimesViewModel, indexPath:IndexPath) {
         titleLabel.text = viewModel.getTitle(indexPath: indexPath)
-        abstractDateLabel.text = viewModel.getAbstract(indexPath: indexPath)
+        abstractLabel.text = viewModel.getAbstract(indexPath: indexPath)
         let imageURL = viewModel.getProductImageURL(indexPath: indexPath)
-        productImage.sd_setImage(with: URL(string:imageURL), placeholderImage: nil, options: .refreshCached, completed: { (image, error, type, url) in
+        productImage?.sd_setImage(with: URL(string:imageURL), placeholderImage: #imageLiteral(resourceName: "Loader"), options: .refreshCached, completed: { (image, error, type, url) in
             if image != nil {
                 self.productImage.image = image
             }

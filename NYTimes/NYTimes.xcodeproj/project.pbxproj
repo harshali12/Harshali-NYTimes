@@ -18,6 +18,8 @@
 		182AA06922913BDB00A0AC08 /* NYTimesListingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 182AA06722913BDB00A0AC08 /* NYTimesListingViewController.xib */; };
 		182AA06D22913C8E00A0AC08 /* NYTimesProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182AA06B22913C8D00A0AC08 /* NYTimesProductTableViewCell.swift */; };
 		182AA06E22913C8E00A0AC08 /* NYTimesProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 182AA06C22913C8E00A0AC08 /* NYTimesProductTableViewCell.xib */; };
+		18740ED7229B6AC400D5DAA6 /* CheckNetworkUsability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18740ED6229B6AC400D5DAA6 /* CheckNetworkUsability.swift */; };
+		18740EDC229B6B9300D5DAA6 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 18740EDB229B6B9300D5DAA6 /* Reachability.m */; };
 		18A8DDCD2295C56F00233A2B /* CustomLoader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A8DDCC2295C56F00233A2B /* CustomLoader.xib */; };
 		18A8DDCF2295C59100233A2B /* CustomLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A8DDCE2295C59100233A2B /* CustomLoader.swift */; };
 		18ADF0AF2291ACB8008A8CEA /* NYTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18ADF0AE2291ACB8008A8CEA /* NYTimes.swift */; };
@@ -63,6 +65,10 @@
 		182AA06722913BDB00A0AC08 /* NYTimesListingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NYTimesListingViewController.xib; sourceTree = "<group>"; };
 		182AA06B22913C8D00A0AC08 /* NYTimesProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYTimesProductTableViewCell.swift; sourceTree = "<group>"; };
 		182AA06C22913C8E00A0AC08 /* NYTimesProductTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NYTimesProductTableViewCell.xib; sourceTree = "<group>"; };
+		18740ED6229B6AC400D5DAA6 /* CheckNetworkUsability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckNetworkUsability.swift; sourceTree = "<group>"; };
+		18740ED9229B6B9200D5DAA6 /* NYTimes-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NYTimes-Bridging-Header.h"; sourceTree = "<group>"; };
+		18740EDA229B6B9300D5DAA6 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		18740EDB229B6B9300D5DAA6 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		18A8DDCC2295C56F00233A2B /* CustomLoader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomLoader.xib; sourceTree = "<group>"; };
 		18A8DDCE2295C59100233A2B /* CustomLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLoader.swift; sourceTree = "<group>"; };
 		18ADF0AE2291ACB8008A8CEA /* NYTimes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NYTimes.swift; sourceTree = "<group>"; };
@@ -210,6 +216,17 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		18740ED8229B6B5800D5DAA6 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				18740ED6229B6AC400D5DAA6 /* CheckNetworkUsability.swift */,
+				18740EDA229B6B9300D5DAA6 /* Reachability.h */,
+				18740EDB229B6B9300D5DAA6 /* Reachability.m */,
+				18740ED9229B6B9200D5DAA6 /* NYTimes-Bridging-Header.h */,
+			);
+			path = Reachability;
+			sourceTree = "<group>";
+		};
 		18A8DDCB2295C53A00233A2B /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -246,6 +263,7 @@
 		18C2608122931A3100395D6F /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				18740ED8229B6B5800D5DAA6 /* Reachability */,
 				18C2608222931A5800395D6F /* Extension */,
 			);
 			path = Utilities;
@@ -344,6 +362,7 @@
 				TargetAttributes = {
 					182AA02D2291346200A0AC08 = {
 						CreatedOnToolsVersion = 10.2.1;
+						LastSwiftMigration = 1020;
 					};
 					182AA0412291346500A0AC08 = {
 						CreatedOnToolsVersion = 10.2.1;
@@ -500,8 +519,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18740ED7229B6AC400D5DAA6 /* CheckNetworkUsability.swift in Sources */,
 				182AA06822913BDB00A0AC08 /* NYTimesListingViewController.swift in Sources */,
 				182AA063229136E400A0AC08 /* Webservice.swift in Sources */,
+				18740EDC229B6B9300D5DAA6 /* Reachability.m in Sources */,
 				18A8DDCF2295C59100233A2B /* CustomLoader.swift in Sources */,
 				18ADF0AF2291ACB8008A8CEA /* NYTimes.swift in Sources */,
 				182AA0322291346200A0AC08 /* AppDelegate.swift in Sources */,
@@ -676,6 +697,7 @@
 			baseConfigurationReference = 3B1B1F6D43E2FE93D0A8773D /* Pods-NYTimes.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = NYTimes/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -684,6 +706,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.NYTimes.NYTimes.NYTimes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "NYTimes/Utilities/Reachability/NYTimes-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -694,6 +718,7 @@
 			baseConfigurationReference = B1088E42C5FC4B2185D82599 /* Pods-NYTimes.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = NYTimes/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -702,6 +727,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.NYTimes.NYTimes.NYTimes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "NYTimes/Utilities/Reachability/NYTimes-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

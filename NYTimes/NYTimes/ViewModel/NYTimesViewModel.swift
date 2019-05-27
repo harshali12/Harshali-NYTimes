@@ -36,8 +36,8 @@ extension NYTimesViewModel {
             }
         })
     }
-  
 }
+
 //MARK: data binding logic
 extension NYTimesViewModel {
     
@@ -48,8 +48,9 @@ extension NYTimesViewModel {
     func getNumberOfRowForSection(section:Int) -> Int {
         return product.count
     }
-    
+
 }
+
 //MARK: News data getter methods
 extension NYTimesViewModel {
     func getTitle(indexPath:IndexPath) -> String {

@@ -23,31 +23,18 @@ struct NYTimes {
     var byline: String = ""
     var created_date: String
     var des_facet: [String]
-    //var geo_facet: [String]
-//    var item_type: String
-//    var kicker: String
-//    var material_type_facet: String
-//    var org_facet: String
-//    var published_date: String
-//    var section: String
-//    var short_url: String
-//    var subsection: String
-      var title: String
-//    var updated_date: String
-//    var url: String
-//    var per_facet: [String]
+    var title: String
     var multimedia: [Multimedia]?
     init(jsonObject : [String : AnyObject]) {
         abstract = jsonObject["abstract"] as? String ?? ""
         byline = jsonObject["byline"] as? String ?? ""
         created_date = jsonObject ["created_date"] as? String ?? ""
-        title = jsonObject ["created_date"] as? String ?? ""
+        title = jsonObject ["title"] as? String ?? ""
         des_facet = jsonObject ["des_facet"] as? [String] ?? [""]
         if let picture =  jsonObject["multimedia"] as? [[String:AnyObject]]{
             multimedia = picture.map({Multimedia(jsonObject:$0)})
         }
     }
-
 }
 
 struct Multimedia {

@@ -11,6 +11,8 @@ import UIKit
 class NYTimesListingViewController: UIViewController {
     
     @IBOutlet weak var tblView: UITableView!
+    @IBOutlet weak var noInternetLbl: UILabel!
+    
     let kNYTimesTableViewCell = "NYTimesProductTableViewCell"
     let nyTimesViewModel = NYTimesViewModel()
     
@@ -18,9 +20,17 @@ class NYTimesListingViewController: UIViewController {
         super.viewDidLoad()
         title = "NYTimes Top Items"
         setupTableView()
+        if !(CheckNetworkUsability.sharedInstance().checkInternetConnection()){
+            noInternetLbl.isHidden = false
+            tblView.isHidden = true
+            return
+        }
+        
         CustomLoader.showActivityView(view: self.view)
         nyTimesViewModel.getNYTimesProduct(completion: {
             DispatchQueue.main.async {
+                self.noInternetLbl.isHidden = true
+                self.tblView.isHidden = false
                 CustomLoader.removeActivityIndicator(self.view)
                 self.tblView.reloadData()
             }
